@@ -7,7 +7,22 @@
       "phone": "123-456-7890",
       "address": "123 Main St",
       "favourite": true
+    },
+    {
+      "id": "3b3e",
+      "name": "diksha",
+      "email": "diksha1@gmail.com",
+      "phone": "+912345654345",
+      "address": "pinnacle teleservices nagpur",
+      "favourite": true
+    },
+    {
+      "id": "69a7",
+      "name": "samiksha",
+      "email": "samiksha.paidlewar@pinnacle.in",
+      "phone": "+912345654345",
+      "address": "law square nagpur",
+      "favourite": false
     }
-  
   ]
 }
