@@ -1,12 +1,12 @@
 {
   "contacts": [
     {
-      "id": "1",
       "name": "John Doe",
       "email": "john@example.com",
       "phone": "123-456-7890",
       "address": "123 Main St",
-      "favourite": true
+      "favourite": true,
+      "id": "1"
     },
     {
       "id": "3b3e",
@@ -17,11 +17,91 @@
       "favourite": true
     },
     {
-      "id": "69a7",
-      "name": "samiksha",
+      "name": "samiksha123",
       "email": "samiksha.paidlewar@pinnacle.in",
       "phone": "+912345654345",
       "address": "law square nagpur",
+      "favourite": true,
+      "id": "69a7"
+    },
+    {
+      "id": "b594",
+      "name": "sandip",
+      "email": "sandip.vispute+4@pinnacle.in",
+      "phone": "+912345654345",
+      "address": "rrrrrrrrrrrrrrrrrrrrr",
+      "favourite": false
+    },
+    {
+      "name": "vaishnavi",
+      "email": "vaishnavi.kalmegh@pinnacle.in",
+      "phone": "+912345654345",
+      "address": "nagpur square",
+      "favourite": false,
+      "id": "62f3"
+    },
+    {
+      "name": "pooja1",
+      "email": "pooja@gmail.com",
+      "phone": "+912345654345",
+      "address": "law square",
+      "favourite": false,
+      "id": "c6b4"
+    },
+    {
+      "id": "0156",
+      "name": "nita",
+      "email": "mita@gmail.com",
+      "phone": "1234567896",
+      "address": "law square",
+      "favourite": false
+    },
+    {
+      "id": "3cde",
+      "name": "karan",
+      "email": "k@gmail.com",
+      "phone": "1234567896",
+      "address": "law square",
+      "favourite": false
+    },
+    {
+      "id": "061d",
+      "name": "sunit",
+      "email": "sunit.patil123@pinnacle.in",
+      "phone": "1234567896",
+      "address": "law square",
+      "favourite": false
+    },
+    {
+      "id": "deb2",
+      "name": "chaya",
+      "email": "chaya@gmail.com",
+      "phone": "1234567896",
+      "address": "law square",
+      "favourite": true
+    },
+    {
+      "id": "cab3",
+      "name": "arshad",
+      "email": "arshad@gmail.com",
+      "phone": "1234567896",
+      "address": "law square",
+      "favourite": true
+    },
+    {
+      "id": "9ec9",
+      "name": "Ayush",
+      "email": "ayush.bhalekar@pinnacle.in",
+      "phone": "1234567896",
+      "address": "law square",
+      "favourite": false
+    },
+    {
+      "id": "8c97",
+      "name": "saif",
+      "email": "saif@gmail.com",
+      "phone": "1234567896",
+      "address": "law square",
       "favourite": false
     }
   ]
