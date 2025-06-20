@@ -23,6 +23,14 @@ const schema = Yup.object({
   favourite: Yup.boolean()
 });
 
+const defaultFormValues = {
+  name: '',
+  email: '',
+  phone: '',
+  address: '',
+  favourite: false,
+};
+
 export default function ContactFormModal({ open, onClose, contact, onSuccess }) {
   const isEditMode = !!contact;
 
@@ -38,16 +46,22 @@ export default function ContactFormModal({ open, onClose, contact, onSuccess }) 
     reset,
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
-      address: '',
-      favourite: false,
-    },
+    defaultValues: defaultFormValues,
   });
 
-  // Prefill form in edit mode
+  useEffect(() => {
+    if (!open) {
+      reset({
+        name: '',
+        email: '',
+        phone: '',
+        address: '',
+        favourite: false,
+      });
+    }
+  }, [open, reset]);
+
+  
   useEffect(() => {
     if (contact) {
       reset({
@@ -58,10 +72,10 @@ export default function ContactFormModal({ open, onClose, contact, onSuccess }) 
         favourite: contact.favourite || false,
       });
     } else {
-      reset(); // clears the form if adding
+      reset(defaultFormValues); // Explicitly reset to default values
     }
   }, [contact, reset]);
-  
+
   const values = watch();
 
   const onSubmit = (data) => {
@@ -170,6 +184,6 @@ export default function ContactFormModal({ open, onClose, contact, onSuccess }) 
 ContactFormModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  contact: PropTypes.object,         // nullable for Add
-  onSuccess: PropTypes.func,         // optional callback
+  contact: PropTypes.object, // nullable for Add
+  onSuccess: PropTypes.func, // optional callback
 };

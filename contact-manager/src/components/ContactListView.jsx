@@ -9,23 +9,34 @@ import {
   Paper,
   Divider,
   Checkbox,
+  Tooltip,
 } from "@mui/material";
-import { Star, StarBorder, ArrowBack, ArrowForward } from "@mui/icons-material";
+import {
+  Star,
+  StarBorder,
+  ArrowBack,
+  ArrowForward,
+  SearchOutlined,
+} from "@mui/icons-material";
 import useContactStore from "../store/contactStore";
-import { useContacts } from "../hooks/useContact";
+import { useContacts, useUpdateContact } from "../hooks/useContact";
 import ContactToolbar from "./ContactToolbar";
-import ContactFormModal from "./ContactFormModal"; 
+import ContactFormModal from "./ContactFormModal";
+import ContactDetailDialog from "./ContactDetailDialog";
+
 export default function ContactListView() {
   const { search, showFavorites } = useContactStore();
   const [currentPage, setCurrentPage] = useState(1);
   const [formOpen, setFormOpen] = useState(false);
   const [editingContact, setEditingContact] = useState(null);
+  const [selectedContact, setSelectedContact] = useState(null);
 
   const { data, isLoading, refetch } = useContacts(
     currentPage,
     search,
     showFavorites
   );
+  const { mutate: updateContact } = useUpdateContact(); // Add mutation hook
   const contacts = useMemo(() => data?.contacts || [], [data]);
   const total = data?.total || 0;
   const totalPages = Math.ceil(total / 10);
@@ -39,10 +50,29 @@ export default function ContactListView() {
   }, [currentPage]);
 
   const handleAddClick = useCallback(() => {
-    setEditingContact(null);     // Reset editing state (important)
-    setFormOpen(true);           // Open the form modal
+    setEditingContact(null);
+    setFormOpen(true);
   }, []);
-  
+
+  const handleQuickView = useCallback((contact) => {
+    setSelectedContact(contact);
+  }, []);
+
+  const handleToggleFavorite = useCallback(
+    (contact) => {
+      updateContact({
+        id: contact.id,
+        name: contact.name,
+        email: contact.email,
+        phone: contact.phone,
+        address: contact.address,
+        favourite: !contact.favourite, // Toggle the favourite status
+      });
+    },
+    [updateContact]
+  );
+
+  const closeQuickView = () => setSelectedContact(null);
 
   return (
     <Box
@@ -70,7 +100,7 @@ export default function ContactListView() {
           flexDirection: "column",
         }}
       >
-        <Typography variant="h6" fontWeight={700} mb={1}>
+        <Typography variant="h6" fontWeight={700} mb={2}>
           Contact List
         </Typography>
 
@@ -119,13 +149,27 @@ export default function ContactListView() {
                       </Typography>
                     </Box>
                   </Stack>
-                  <IconButton size="small">
-                    {contact.favourite ? (
-                      <Star sx={{ color: "#fbc02d" }} fontSize="small" />
-                    ) : (
-                      <StarBorder fontSize="small" />
-                    )}
-                  </IconButton>
+                  <Stack direction="row" spacing={0.5}>
+                    <Tooltip title={contact.favourite ? "Unfavorite" : "Favorite"}>
+                      <IconButton
+                        size="small"
+                        onClick={() => handleToggleFavorite(contact)}
+                      >
+                        {contact.favourite ? (
+                          <Star sx={{ color: "#fbc02d" }} fontSize="small" />
+                        ) : (
+                          <StarBorder fontSize="small" />
+                        )}
+                      </IconButton>
+                    </Tooltip>
+                    <IconButton
+                      size="small"
+                      onClick={() => handleQuickView(contact)}
+                      sx={{ color: "#00bcd4" }}
+                    >
+                      <SearchOutlined fontSize="small" />
+                    </IconButton>
+                  </Stack>
                 </Box>
               ))
             )}
@@ -171,16 +215,33 @@ export default function ContactListView() {
           + ADD CONTACT
         </Button>
       </Paper>
-    
+
       <ContactFormModal
         open={formOpen}
         onClose={() => setFormOpen(false)}
-        contact={editingContact}
+        contact={editingContact ?? undefined}
         onSuccess={() => {
           setFormOpen(false);
           refetch();
         }}
       />
+
+      {selectedContact && (
+        <ContactDetailDialog
+          open={Boolean(selectedContact)}
+          contact={selectedContact}
+          onClose={closeQuickView}
+          onEdit={(contact) => {
+            setEditingContact(contact);
+            setFormOpen(true);
+            closeQuickView();
+          }}
+          onDelete={() => {
+            closeQuickView();
+            refetch();
+          }}
+        />
+      )}
     </Box>
   );
 }
