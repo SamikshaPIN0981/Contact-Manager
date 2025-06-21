@@ -12,6 +12,7 @@ export const useContacts = (page, search, showFavorites) => {
     queryKey: ['contacts', page, search, showFavorites],
     queryFn: () => fetchContacts({ page, search, showFavorites }),
     keepPreviousData: true,
+    staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
 

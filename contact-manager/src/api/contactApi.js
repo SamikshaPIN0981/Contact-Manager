@@ -1,30 +1,51 @@
-// src/api/contactApi.js
 const BASE_URL = 'http://localhost:3001';
 
 export const fetchContacts = async ({ page, search, showFavorites }) => {
-  const params = new URLSearchParams({ _page: page, _limit: '10' });
-  if (search) params.append('q', search);
-  if (showFavorites) params.append('favourite', 'true');
+  const params = new URLSearchParams({
+    page: page,
+    limit: 10,
+  });
+  if (search) params.append("search", search);
+  if (showFavorites) params.append("favourite", "true");
 
-  const response = await fetch(`${BASE_URL}/contacts?${params}`);
-  const data = await response.json();
-  const total = response.headers.get('X-Total-Count');
+  const response = await fetch(`${BASE_URL}/contacts?${params.toString()}`);
+  if (!response.ok) throw new Error("Failed to fetch contacts");
 
-  return { contacts: data, total: Number(total) };
+  const paginatedData = await response.json();
+  const total = Number(response.headers.get("X-Total-Count")) || paginatedData.length;
+
+  const allResponse = await fetch(`${BASE_URL}/contacts`);
+  if (!allResponse.ok) throw new Error("Failed to fetch all contacts");
+  const allData = await allResponse.json();
+  const sortedAllData = [...allData].sort((a, b) => Number(a.id) - Number(b.id));
+
+  let contacts = paginatedData;
+  const start = (page - 1) * 10;
+  if (contacts.length === 0 || contacts[0]?.id !== sortedAllData[start]?.id) {
+    contacts = sortedAllData.slice(start, start + 10);
+  }
+
+  console.log(`Page ${page} data:`, contacts, `Total: ${total}`);
+  return { contacts, total };
 };
 
 export const createContact = async (contact) => {
+  const allContacts = await fetch(`${BASE_URL}/contacts`).then((res) => res.json());
+
+  const maxId = Math.max(0, ...allContacts.map((c) => Number(c.id) || 0));
+  const newContact = { ...contact, id: String(maxId + 1) }; // Assign string id
+
   const response = await fetch(`${BASE_URL}/contacts`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(contact),
+    body: JSON.stringify(newContact),
   });
   if (!response.ok) throw new Error('Failed to create contact');
   return response.json();
 };
 
-export const updateContact = async ({ id, ...contact }) => {
-  const response = await fetch(`${BASE_URL}/contacts/${id}`, {
+export const updateContact = async (contact) => {
+  const response = await fetch(`${BASE_URL}/contacts/${String(contact.id)}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(contact),
