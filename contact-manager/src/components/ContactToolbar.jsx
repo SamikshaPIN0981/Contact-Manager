@@ -1,41 +1,61 @@
-import { TextField, Stack, InputAdornment, Checkbox, Typography } from '@mui/material';
+import {
+  TextField,
+  Stack,
+  FormControlLabel,
+  Switch,
+  InputAdornment,
+} from '@mui/material';
 import { Search } from '@mui/icons-material';
 import useContactStore from '../store/contactStore';
 
 export default function ContactToolbar({ onResetPage }) {
   const { search, showFavorites, setSearch, setShowFavorites } = useContactStore();
 
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+    onResetPage();
+  };
+
+  const handleFavoritesToggle = (e) => {
+    setShowFavorites(e.target.checked);
+    onResetPage();
+  };
+
   return (
-    <Stack spacing={1}>
+    <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between" mb={2}>
       <TextField
-        placeholder="Search contact"
         size="small"
-        fullWidth
+        variant="outlined"
+        placeholder="Search contact"
         value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-          onResetPage();
-        }}
+        onChange={handleSearchChange}
+        fullWidth
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
               <Search fontSize="small" />
             </InputAdornment>
           ),
-          sx: { borderRadius: 3, backgroundColor: "#f7f7f7" },
+          sx: {
+            borderRadius: 10, // Rounded corners
+            backgroundColor: '#f9f9f9',
+           width:'105%'
+          },
         }}
       />
-      <Stack direction="row" alignItems="center" spacing={1}>
-        <Checkbox
-          checked={showFavorites}
-          onChange={() => {
-            setShowFavorites(!showFavorites);
-            onResetPage();
-          }}
-          size="small"
-        />
-        <Typography variant="body2">Show Favourites Only</Typography>
-      </Stack>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={showFavorites}
+            onChange={handleFavoritesToggle}
+            size="small"
+            color="primary"
+          />
+        }
+        label="Show Favourites"
+        labelPlacement="end"
+        sx={{ whiteSpace: 'nowrap', ml: 1 }}
+      />
     </Stack>
   );
 }
