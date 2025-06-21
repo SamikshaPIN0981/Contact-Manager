@@ -1,12 +1,59 @@
-# React + Vite
+### Contact Manager
+A professional Contact Manager web app built with React (Vite), Zustand, TanStack React Query, React Hook Form, and MUI.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Paginated contact list with Next/Previous buttons
+Search contacts by name (server-side)
+Toggle to show only favorite contacts
+View, add, edit, and delete contacts via modals
+Form validation for email and phone
+Optimized with useMemo and useCallback
 
-## Expanding the ESLint configuration
+### Setup Instructions
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+##### Clone the repository:
+git clone <repository-url>
+cd contact-manager
+
+
+##### Install dependencies:
+npm install
+
+
+###### Run JSON Server (Mock API):
+npx json-server --port 3001 --watch db.json
+
+
+##### Start the Vite development server:
+npm run dev
+
+
+Open http://localhost:5173 in your browser.
+
+##### Mock API
+
+Base URL: http://localhost:3001/api
+Endpoints: 
+GET /contacts?page=1&limit=10&search=John
+POST /contacts
+PUT /contacts/:id
+DELETE /contacts/:id
+
+
+
+##### Approach
+
+Zustand: Manages UI state (search input, selected contact, favorites toggle).
+React Query: Handles server-side data fetching, mutations, and cache invalidation.
+React Hook Form: Manages form validation and pre-filling for add/edit.
+MUI: Provides a polished UI with modals, inputs, and buttons.
+Optimization: Uses useMemo for contact list rendering and useCallback for event handlers.
+
+##### Extras
+
+Global loading spinner for all API calls.
+Error alerts for failed API requests.
+Responsive design with Tailwind CSS.
+
