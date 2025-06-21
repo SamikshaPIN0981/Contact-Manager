@@ -1,5 +1,8 @@
 const BASE_URL = 'http://localhost:3001';
 
+// Fetch contacts with pagination, search, and favorites filtering.
+// Falls back to slicing all sorted contacts if paginated data doesn't align.
+ 
 export const fetchContacts = async ({ page, search, showFavorites }) => {
   const params = new URLSearchParams({
     page: page,
@@ -13,7 +16,7 @@ export const fetchContacts = async ({ page, search, showFavorites }) => {
 
   const paginatedData = await response.json();
   const total = Number(response.headers.get("X-Total-Count")) || paginatedData.length;
-
+  
   const allResponse = await fetch(`${BASE_URL}/contacts`);
   if (!allResponse.ok) throw new Error("Failed to fetch all contacts");
   const allData = await allResponse.json();
@@ -29,6 +32,7 @@ export const fetchContacts = async ({ page, search, showFavorites }) => {
   return { contacts, total };
 };
 
+// Create a new contact with an auto-generated ID.
 export const createContact = async (contact) => {
   const allContacts = await fetch(`${BASE_URL}/contacts`).then((res) => res.json());
 
@@ -44,6 +48,7 @@ export const createContact = async (contact) => {
   return response.json();
 };
 
+// Update an existing contact by ID.
 export const updateContact = async (contact) => {
   const response = await fetch(`${BASE_URL}/contacts/${String(contact.id)}`, {
     method: 'PUT',
@@ -54,6 +59,7 @@ export const updateContact = async (contact) => {
   return response.json();
 };
 
+// Delete a contact by ID.
 export const deleteContact = async (id) => {
   const response = await fetch(`${BASE_URL}/contacts/${id}`, {
     method: 'DELETE',

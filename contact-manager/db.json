@@ -1,28 +1,12 @@
 {
   "contacts": [
     {
-      "name": "John Doe",
-      "email": "john@example.com",
-      "phone": "123-456-7890",
-      "address": "123 Main St",
-      "favourite": true,
-      "id": "1"
-    },
-    {
       "id": "2",
-      "name": "diksha",
+      "name": "diksha1",
       "email": "diksha@gmail.com",
       "phone": "1234567896",
       "address": "pinnacle teleservices",
-      "favourite": false
-    },
-    {
-      "name": "pooja1",
-      "email": "pooja@gmail.com",
-      "phone": "1234567896",
-      "address": "law square",
-      "favourite": false,
-      "id": "3"
+      "favourite": true
     },
     {
       "id": "4",
@@ -33,84 +17,44 @@
       "favourite": true
     },
     {
-      "id": "5",
-      "name": "sandip",
-      "email": "sandip.vispute+4@pinnacle.in",
-      "phone": "1234567896",
-      "address": "pinnacle teleservises",
-      "favourite": true
-    },
-    {
-      "name": "chaya1",
-      "email": "chaya@gmail.com",
-      "phone": "1234567896",
-      "address": "pinnacle teleservises",
-      "favourite": false,
-      "id": "6"
-    },
-    {
-      "name": "arshad1",
+      "id": "7",
+      "name": "arshad10",
       "email": "arshad@gmail.com",
       "phone": "1234567896",
       "address": "pinnacle teleservices",
-      "favourite": false,
-      "id": "7"
-    },
-    {
-      "id": "8",
-      "name": "nita",
-      "email": "nita@gmail.com",
-      "phone": "1234567896",
-      "address": "pinnacle teleservices",
-      "favourite": false
-    },
-    {
-      "id": "9",
-      "name": "atish",
-      "email": "atish@gmail.com",
-      "phone": "1234567896",
-      "address": "pinnacle teleservices",
-      "favourite": false
+      "favourite": true
     },
     {
       "id": "10",
-      "name": "samiksha",
+      "name": "samiksha1",
       "email": "samiksha.paidlewar@pinnacle.in",
       "phone": "1234567896",
       "address": "pinnacle teleservices",
       "favourite": false
     },
     {
-      "name": "sunit1",
-      "email": "sunit.patil@pinnacle.in",
-      "phone": "1234567896",
-      "address": "pinnacle teleservices",
-      "favourite": false,
-      "id": "11"
-    },
-    {
-      "id": "12",
-      "name": "mamta",
-      "email": "mamta@gmail.com",
-      "phone": "1234567896",
-      "address": "pinnacle teleservices",
-      "favourite": false
-    },
-    {
       "id": "13",
-      "name": "ram1",
-      "email": "ram@gmail.com",
-      "phone": "1234567896",
-      "address": "efffffffffffffffdcdvfvfb",
+      "name": "karuna paidlewar",
+      "email": "karuna@gmail.com",
+      "phone": "+911234567876",
+      "address": "kamptee nagpur",
       "favourite": false
     },
     {
-      "id": "14",
-      "name": "raman verma",
-      "email": "raman@gmail.com",
-      "phone": "1234567896",
-      "address": "sitaburdi nagpur",
+      "id": "17",
+      "name": "nikhil barapate1",
+      "email": "nikhil@gmail.com",
+      "phone": "+911234567876",
+      "address": "google square",
       "favourite": false
+    },
+    {
+      "id": "18",
+      "name": "namita singh",
+      "email": "namita@gmail.com",
+      "phone": "+911234567876",
+      "address": "law square nagpur",
+      "favourite": true
     }
   ]
 }
