@@ -1,14 +1,6 @@
 {
   "contacts": [
     {
-      "id": "2",
-      "name": "diksha12",
-      "email": "diksha@gmail.com",
-      "phone": "1234567896",
-      "address": "pinnacle teleservices",
-      "favourite": true
-    },
-    {
       "id": "4",
       "name": "vaishnavi",
       "email": "vaishnavi.meshram@pinnacle.in",
@@ -22,7 +14,7 @@
       "email": "arshad@gmail.com",
       "phone": "1234567896",
       "address": "pinnacle teleservices",
-      "favourite": true
+      "favourite": false
     },
     {
       "id": "10",
@@ -38,7 +30,7 @@
       "email": "karuna@gmail.com",
       "phone": "+911234567876",
       "address": "kamptee nagpur",
-      "favourite": false
+      "favourite": true
     },
     {
       "id": "17",
