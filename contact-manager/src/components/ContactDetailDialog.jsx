@@ -12,10 +12,18 @@ import {
   Box,
   IconButton,
   Slide,
+  Paper,
 } from "@mui/material";
-import { Edit, Delete, Close } from "@mui/icons-material";
+import {
+  Edit,
+  Delete,
+  Close,
+  Email,
+  Phone,
+  LocationOn,
+  Person,
+} from "@mui/icons-material";
 
-// Transition component for dialog animations
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -54,7 +62,6 @@ export default function ContactDetailDialog({
   const [confirmOpen, setConfirmOpen] = useState(false);
   if (!contact) return null;
 
-  // Handle delete confirmation
   const handleDeleteClick = () => setConfirmOpen(true);
   const handleConfirmDelete = () => {
     onDelete(contact.id);
@@ -63,7 +70,6 @@ export default function ContactDetailDialog({
   };
   const handleCancelDelete = () => setConfirmOpen(false);
 
-  // Render the contact detail dialog
   return (
     <>
       <Dialog
@@ -73,113 +79,167 @@ export default function ContactDetailDialog({
         fullWidth
         maxWidth="xs"
         PaperProps={{
-          sx: { borderRadius: 3 },
+          sx: {
+            borderRadius: 4,
+            overflow: "hidden",
+            bgcolor: "#ffffff",
+          },
         }}
       >
         <DialogTitle
           sx={{
-            textAlign: "center",
+            bgcolor: "#f5f5f5",
+            px: 3,
+            py: 2,
             fontWeight: 700,
-            fontSize: "1.5rem",
-            color: "primary.main",
+            fontSize: "1.4rem",
+            textAlign: "center",
             position: "relative",
-            py: 3,
-            bgcolor: "grey.100",
           }}
         >
           Contact Details
           <IconButton
             onClick={onClose}
-            sx={{ position: "absolute", right: 8, top: 8, color: "grey.600" }}
+            sx={{ position: "absolute", right: 12, top: 12, color: "grey.600" }}
           >
             <Close />
           </IconButton>
         </DialogTitle>
 
-        <Divider />
+        <Divider sx={{ borderColor: "#e0e0e0" }} />
 
         <DialogContent sx={{ p: 4 }}>
-          <Stack spacing={3} alignItems="center">
+          <Stack spacing={2} alignItems="center">
             <Avatar
               src={contact.avatar}
               alt={contact.name}
               sx={{
-                width: 100,
-                height: 100,
-                border: 3,
-                borderColor: "primary.main",
-                boxShadow: 3,
+                width: 90,
+                height: 90,
                 bgcolor: contact.avatar
                   ? "transparent"
                   : getAvatarColor(contact.name),
-                color: "white",
-                fontSize: "2rem",
+                color: "#fff",
+                fontSize: "2.5rem",
                 fontWeight: 600,
-                transition: "transform 0.3s",
-                "&:hover": { transform: "scale(1.05)" },
               }}
-            > 
+            >
+              {!contact.avatar && contact.name[0]}
             </Avatar>
 
-            <Typography variant="h5" fontWeight={600}>
+            <Typography variant="h6" fontWeight={700}>
               {contact.name}
             </Typography>
-            <Stack spacing={1.5} alignItems="center">
-              <Typography variant="body1" color="text.secondary">
-                <Box component="span" fontWeight={500}>
-                  Email:
-                </Box>{" "}
-                {contact.email}
-              </Typography>
-              <Typography variant="body1" color="text.secondary">
-                <Box component="span" fontWeight={500}>
-                  Phone:
-                </Box>{" "}
-                {contact.phone}
-              </Typography>
-              <Typography variant="body1" color="text.secondary">
-                <Box component="span" fontWeight={500}>
-                  Address:
-                </Box>{" "}
-                {contact.address}
-              </Typography>
-            </Stack>
+
+            <Paper
+              elevation={0}
+              sx={{
+                width: "100%",
+                p: 2.5,
+                borderRadius: 2,
+                bgcolor: "#fafafa",
+                border: "1px solid #e0e0e0",
+              }}
+            >
+              <Stack
+                spacing={2}
+                divider={<Divider sx={{ borderColor: "#e0e0e0" }} />}
+              >
+                <InfoItem
+                  icon={<Person sx={{ color: "#4caf50" }} />}
+                  label="Full Name"
+                  value={contact.name}
+                />
+                <InfoItem
+                  icon={<Email sx={{ color: "#2196f3" }} />}
+                  label="Email Address"
+                  value={contact.email}
+                />
+                <InfoItem
+                  icon={<Phone sx={{ color: "#ffb300" }} />}
+                  label="Phone Number"
+                  value={contact.phone}
+                />
+                <InfoItem
+                  icon={<LocationOn sx={{ color: "#e91e63" }} />}
+                  label="Address"
+                  value={contact.address}
+                />
+              </Stack>
+            </Paper>
           </Stack>
         </DialogContent>
 
-        <Divider />
+        <Divider sx={{ borderColor: "#e0e0e0" }} />
 
         <DialogActions
-          sx={{ justifyContent: "center", p: 3, bgcolor: "grey.100" }}
+          sx={{
+            p: 3,
+            justifyContent: "center",
+            bgcolor: "#fafafa",
+          }}
         >
-          <Button
-            onClick={() => onEdit(contact)}
-            variant="outlined"
-            color="primary"
-            startIcon={<Edit />}
-            sx={{
-              borderRadius: 2,
-              px: 3,
-              fontWeight: 600,
-              textTransform: "none",
-            }}
-          >
-            Edit
-          </Button>
-          <Button
-            onClick={handleDeleteClick}
-            variant="outlined"
-            color="error"
-            startIcon={<Delete />}
-            sx={{
-              borderRadius: 2,
-              px: 3,
-              fontWeight: 600,
-              textTransform: "none",
-            }}
-          >
-            Delete
-          </Button>
+          <Stack direction="row" spacing={2}>
+            <Button
+              onClick={() => onEdit(contact)}
+              variant="outlined"
+              startIcon={<Edit />}
+              sx={{
+                backgroundColor: "#e3f2fd",
+                color: "#1565c0",
+                fontWeight: 600,
+                textTransform: "none",
+                borderColor: "#bbdefb",
+                borderRadius: 2,
+                px: 3,
+                minWidth: 140,
+                "&:hover": {
+                  backgroundColor: "#bbdefb",
+                },
+              }}
+            >
+              Edit
+            </Button>
+            <Button
+              onClick={handleDeleteClick}
+              variant="outlined"
+              startIcon={<Delete />}
+              sx={{
+                backgroundColor: "#fdecea",
+                color: "#c62828",
+                fontWeight: 600,
+                textTransform: "none",
+                borderColor: "#f8bbd0",
+                borderRadius: 2,
+                px: 3,
+                minWidth: 140,
+                "&:hover": {
+                  backgroundColor: "#f8bbd0",
+                },
+              }}
+            >
+              Delete
+            </Button>
+            <Button
+              onClick={onClose}
+              variant="outlined"
+              sx={{
+                backgroundColor: "#ffffff",
+                color: "#757575",
+                fontWeight: 500,
+                textTransform: "none",
+                borderColor: "#e0e0e0",
+                borderRadius: 2,
+                px: 3,
+                minWidth: 100,
+                "&:hover": {
+                  backgroundColor: "#f5f5f5",
+                },
+              }}
+            >
+              Close
+            </Button>
+          </Stack>
         </DialogActions>
       </Dialog>
 
@@ -190,16 +250,16 @@ export default function ContactDetailDialog({
         TransitionComponent={Transition}
         fullWidth
         maxWidth="xs"
-        PaperProps={{
-          sx: { borderRadius: 3 },
-        }}
+        PaperProps={{ sx: { borderRadius: 3 } }}
       >
         <DialogTitle
           sx={{
             fontWeight: 600,
             fontSize: "1.25rem",
             color: "error.main",
-            bgcolor: "grey.100",
+            bgcolor: "#f5f5f5",
+            px: 3,
+            py: 2,
             position: "relative",
           }}
         >
@@ -211,17 +271,19 @@ export default function ContactDetailDialog({
             <Close />
           </IconButton>
         </DialogTitle>
+
         <DialogContent sx={{ p: 3 }}>
           <Typography>
-            Are you sure you want to delete{" "}
-            <Box component="span" fontWeight={600}>
+            Are you sure you want to permanently delete{" "}
+            <Box component="span" fontWeight={700}>
               {contact.name}
             </Box>
             ?
           </Typography>
         </DialogContent>
+
         <DialogActions
-          sx={{ justifyContent: "center", p: 2, bgcolor: "grey.100" }}
+          sx={{ justifyContent: "center", p: 2, bgcolor: "#f9f9f9" }}
         >
           <Button
             onClick={handleCancelDelete}
@@ -233,14 +295,36 @@ export default function ContactDetailDialog({
           </Button>
           <Button
             onClick={handleConfirmDelete}
-            variant="outlined"
-            color="error"
-            sx={{ minWidth: 120 }}
+            variant="contained"
+            sx={{
+              minWidth: 120,
+              backgroundColor: "#f8d7da", // Light red background
+              color: "#a94442", // Darker red text
+              "&:hover": {
+                backgroundColor: "#f1b0b7", // Slightly darker on hover
+              },
+            }}
           >
             Delete
           </Button>
         </DialogActions>
       </Dialog>
     </>
+  );
+}
+
+function InfoItem({ icon, label, value }) {
+  return (
+    <Stack direction="row" spacing={2} alignItems="center">
+      <Box>{icon}</Box>
+      <Box>
+        <Typography variant="caption" color="text.secondary">
+          {label}
+        </Typography>
+        <Typography variant="body1" fontWeight={500}>
+          {value}
+        </Typography>
+      </Box>
+    </Stack>
   );
 }

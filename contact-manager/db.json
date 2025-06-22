@@ -2,7 +2,7 @@
   "contacts": [
     {
       "id": "2",
-      "name": "diksha1",
+      "name": "diksha12",
       "email": "diksha@gmail.com",
       "phone": "1234567896",
       "address": "pinnacle teleservices",
@@ -26,7 +26,7 @@
     },
     {
       "id": "10",
-      "name": "samiksha1",
+      "name": "samiksha12",
       "email": "samiksha.paidlewar@pinnacle.in",
       "phone": "1234567896",
       "address": "pinnacle teleservices",
@@ -42,18 +42,10 @@
     },
     {
       "id": "17",
-      "name": "nikhil barapate1",
+      "name": "nikhil barapate12",
       "email": "nikhil@gmail.com",
       "phone": "+911234567876",
       "address": "google square",
-      "favourite": false
-    },
-    {
-      "id": "18",
-      "name": "namita singh",
-      "email": "namita@gmail.com",
-      "phone": "+911234567876",
-      "address": "law square nagpur",
       "favourite": true
     }
   ]

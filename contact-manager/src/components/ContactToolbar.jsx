@@ -59,9 +59,9 @@ export default function ContactToolbar({ onResetPage }) {
             </InputAdornment>
           ),
           sx: {
-            borderRadius: 10, // Rounded corners
+            borderRadius: 4, // Rounded corners
             backgroundColor: "#f9f9f9",
-            width: "105%",
+            width: "98%",
           },
         }}
       />

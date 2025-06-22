@@ -16,7 +16,10 @@ import {
   ArrowBack,
   ArrowForward,
   SearchOutlined,
+  InfoOutlined,
 } from "@mui/icons-material";
+import ContactsIcon from "@mui/icons-material/Contacts";
+
 import useContactStore from "../store/contactStore";
 import {
   useContacts,
@@ -189,15 +192,18 @@ export default function ContactListView() {
           flexDirection: "column",
         }}
       >
-        <Typography
-          variant="h6"
-          fontWeight={700}
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          justifyContent="center"
           mb={2}
-          align="center"
-          sx={{ width: "100%" }}
         >
-          Contact List
-        </Typography>
+          <ContactsIcon fontSize="small" sx={{ color: "#2196f3" }} />
+          <Typography variant="h6" fontWeight={700}>
+            Contact Manager
+          </Typography>
+        </Stack>
 
         {/* Toolbar for search/favorite toggle */}
         <ContactToolbar onResetPage={() => setCurrentPage(1)} />
@@ -257,11 +263,7 @@ export default function ContactListView() {
                         {contact.name}
                       </Typography>
 
-                      <Typography
-                        fontSize={12}
-                  
-                        color="text.secondary"
-                      >
+                      <Typography fontSize={12} color="text.secondary">
                         {contact.email}
                       </Typography>
                     </Box>
@@ -283,13 +285,13 @@ export default function ContactListView() {
                       </IconButton>
                     </Tooltip>
 
-                    <Tooltip title="View">
+                    <Tooltip title="View Details">
                       <IconButton
                         size="small"
                         onClick={() => handleQuickView(contact)}
                         sx={{ color: "#00bcd4" }}
                       >
-                        <SearchOutlined fontSize="small" />
+                        <InfoOutlined fontSize="small" />
                       </IconButton>
                     </Tooltip>
                   </Stack>

@@ -17,6 +17,10 @@ Optimized with useMemo and useCallback
 git clone <repository-url>
 cd contact-manager
 
+#### create react app ####
+npm create vite@latest contact-manager -- --template react
+cd contact-manager
+
 
 ##### Install dependencies:
 npm install
@@ -55,5 +59,4 @@ Optimization: Uses useMemo for contact list rendering and useCallback for event 
 
 Global loading spinner for all API calls.
 Error alerts for failed API requests.
-Responsive design with Tailwind CSS.
 
