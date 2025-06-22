@@ -1,0 +1,44 @@
+{
+  "contacts": [
+    {
+      "id": "4",
+      "name": "vaishnavi1",
+      "email": "vaishnavi.meshram@pinnacle.in",
+      "phone": "1234567896",
+      "address": "law square",
+      "favourite": true
+    },
+    {
+      "id": "7",
+      "name": "arshad10",
+      "email": "arshad@gmail.com",
+      "phone": "1234567896",
+      "address": "pinnacle teleservices",
+      "favourite": true
+    },
+    {
+      "id": "10",
+      "name": "samiksha1234",
+      "email": "samiksha.paidlewar@pinnacle.in",
+      "phone": "1234567896",
+      "address": "pinnacle teleservices",
+      "favourite": false
+    },
+    {
+      "id": "13",
+      "name": "karuna paidlewar",
+      "email": "karuna@gmail.com",
+      "phone": "+911234567876",
+      "address": "kamptee nagpur",
+      "favourite": true
+    },
+    {
+      "id": "17",
+      "name": "nikhil barapate12",
+      "email": "nikhil@gmail.com",
+      "phone": "+911234567876",
+      "address": "google square",
+      "favourite": true
+    }
+  ]
+}
