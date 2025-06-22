@@ -28,7 +28,6 @@ export const fetchContacts = async ({ page, search, showFavorites }) => {
     contacts = sortedAllData.slice(start, start + 10);
   }
 
-  console.log(`Page ${page} data:`, contacts, `Total: ${total}`);
   return { contacts, total };
 };
 

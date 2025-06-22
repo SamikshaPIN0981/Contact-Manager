@@ -7,6 +7,8 @@ import {
   Stack,
   Typography,
   Paper,
+  Snackbar,
+  Alert,
   Divider,
   Tooltip,
 } from "@mui/material";
@@ -43,6 +45,9 @@ export default function ContactListView() {
   const [formOpen, setFormOpen] = useState(false); // Contact form modal state
   const [editingContact, setEditingContact] = useState(null);
   const [selectedContact, setSelectedContact] = useState(null); // For viewing contact details
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   // Function to get a color based on the contact's name for the avatar
   const getAvatarColor = (name) => {
@@ -131,7 +136,15 @@ export default function ContactListView() {
           favourite: !contact.favourite,
         },
         {
-          onSuccess: () => refetch(),
+          onSuccess: () => {
+            setSnackbarMessage(
+              !contact.favourite
+                ? "Added to favorites"
+                : "Removed from favorites"
+            );
+            setSnackbarOpen(true);
+            refetch();
+          },
         }
       );
     },
@@ -367,6 +380,23 @@ export default function ContactListView() {
           onDelete={handleDeleteContact}
         />
       )}
+      {/* Snackbar for favorite status notification */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        sx={{
+          mt: 1,
+          ".MuiSnackbarContent-root": {
+            backgroundColor: "#e0f7fa", // light cyan
+            color: "#00796b",
+            fontWeight: 500,
+            border: "1px solid #b2ebf2",
+          },
+        }}
+        message={snackbarMessage}
+      />
     </Box>
   );
 }

@@ -2,7 +2,7 @@
   "contacts": [
     {
       "id": "4",
-      "name": "vaishnavi",
+      "name": "vaishnavi1",
       "email": "vaishnavi.meshram@pinnacle.in",
       "phone": "1234567896",
       "address": "law square",
@@ -14,11 +14,11 @@
       "email": "arshad@gmail.com",
       "phone": "1234567896",
       "address": "pinnacle teleservices",
-      "favourite": false
+      "favourite": true
     },
     {
       "id": "10",
-      "name": "samiksha12",
+      "name": "samiksha1234",
       "email": "samiksha.paidlewar@pinnacle.in",
       "phone": "1234567896",
       "address": "pinnacle teleservices",
